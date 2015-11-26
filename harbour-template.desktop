@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=no-invoker
+Icon=harbour-template
+Exec=harbour-template
+Name=Test
+

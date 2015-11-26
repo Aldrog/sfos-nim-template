@@ -5,7 +5,7 @@ projDir=$PWD
 dosBuildDir="lib/DOtherSide/build-$1"
 mkdir -p $dosBuildDir
 cd $dosBuildDir
-sb2 -t SailfishOS-$1 -m sdk-build cmake-3.4 -DCMAKE_BUILD_TYPE=Release ..
+sb2 -t SailfishOS-$1 -m sdk-build cmake -DCMAKE_BUILD_TYPE=Release ..
 sb2 -t SailfishOS-$1 -m sdk-build make
 cd $projDir
 

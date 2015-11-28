@@ -1,5 +1,8 @@
 # SailfishOS Nim Template Project
 This is a template for SailfishOS app in Nim language.
+## How it works
+This template makes use of [nimqml](https://github.com/filcuc/nimqml) module which is built on top of [DOtherSide](https://github.com/filcuc/DOtherSide) library.  
+This repository includes stripped version of DOtherSide sources (without dependency on QtWidgets so an app you build will be able to pass harbour check)
 ## How to build
 ### Preparation
 * Log into Mer build engine. It's described on https://sailfishos.org/develop/sdk-overview/develop-faq/
@@ -26,24 +29,12 @@ sb2 -t SailfishOS-i486 -m sdk-install -R ./koch install /usr/local/bin
 git clone https://github.com/nim-lang/nimble.git
 cd nimble
 sb2 -t SailfishOS-i486 -m sdk-install -R nim c -r src/nimble install
+echo 'PATH=$PATH:'$HOME'/.nimble/bin' >> ~/.bashrc
 ```
 * Install nimqml module:
 ```
-sb2 -t SailfishOS-i486 -m sdk-install -R nimble install nimqml
+nimble install nimqml
 ```
-* Install cmake 3.x for both targets.
-* Get DOtherSide:
-```
-git clone https://github.com/filcuc/DOtherSide.git
-```
-* Build DOtherSide for desired platform. For i486:
-```
-mkdir build-i486
-sb2 -t SailfishOS-i486 -m sdk-build cmake-3.4 -DCMAKE_BUILD_TYPE=Release
-sb2 -t SailfishOS-i486 -m sdk-build make
-```
-* Copy lib/libDOtherSide.so to `project directory`/lib
-
 ### Build
 * In build engine launch build.sh with desired architecture:
 ```
@@ -53,8 +44,6 @@ sh build.sh i486
 This will produce rpm package in ../build-projname-arch/RPMS
 
 ## TODO
-* Automate DOtherSide build
-* Include stripped DOtherSide sources to repository (for passing harbour test)
-* Port to cmake 2.8 to get rid of cmake 3.x dependency
-* Integrate libsailfishapp for view caching (may be quite tricky)
-* Maybe something I forgot about
+* Integrate mapplauncherd for view caching (may be quite tricky)
+* Support debug/release build modes
+* Add how-to-rename instructions

@@ -5,12 +5,12 @@ projDir=$PWD
 dosBuildDir="lib/DOtherSide/build-$1"
 mkdir -p $dosBuildDir
 cd $dosBuildDir
-sb2 -t SailfishOS-$1 -m sdk-build cmake -DCMAKE_BUILD_TYPE=Release ..
+sb2 -t SailfishOS-$1 -m sdk-build cmake -DCMAKE_BUILD_TYPE=$2 ..
 sb2 -t SailfishOS-$1 -m sdk-build make
 cd $projDir
 
 # Build app
-buildDir="$projDir/../build-$name-$1"
+buildDir="$projDir/../build-$name-$1-$2"
 mkdir -p $buildDir
 mkdir $buildDir/lib
 cp -r rpm $buildDir/
@@ -18,7 +18,7 @@ cp $dosBuildDir/lib/libDOtherSide.so $buildDir/lib/libDOtherSide.so
 cd $buildDir
 echo '
 '$name':	'$projDir'/src/*.nim
-	nim c -o:"'$buildDir'/'$name'" '$projDir'/src/main.nim
+	nim c -o:"'$buildDir'/'$name'" -l:"-L./lib" -d:'$2' '$projDir'/src/main.nim
 
 install:	'$name' '$projDir'/qml/*.qml '$projDir'/'$name'.desktop '$projDir'/icons/*
 	mkdir -p $(DESTDIR)/usr/bin

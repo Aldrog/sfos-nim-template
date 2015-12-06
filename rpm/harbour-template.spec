@@ -11,8 +11,8 @@ Name:       harbour-template
 # << macros
 
 Summary:    Template for Sailfish app written in Nim language.
-Version:    0.2
-Release:    4
+Version:    0.1
+Release:    1
 Group:      Qt/Qt
 License:    BSD
 URL:        http://example.org/

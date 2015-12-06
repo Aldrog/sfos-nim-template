@@ -23,9 +23,9 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import os
+import nimQml
 
 when defined boostable:
-    import nimQml
     {.passC: staticExec("pkg-config --cflags qdeclarative5-boostable").}
     {.passL: staticExec("pkg-config --libs qdeclarative5-boostable").}
     {.passC: staticExec("pkg-config --cflags Qt5Core").}
@@ -34,14 +34,15 @@ when defined boostable:
     proc qApplication*(argc: var cint, argv: cstringArray): QApplication {.
         cdecl, importcpp: "MDeclarativeCache::qApplication(@)", header: "<MDeclarativeCache>".}
 
-    proc application*(): QGuiApplication =
-        var c: cint = 0
-        var v = cast[cstringArray](alloc(0))
-        var qapp = qApplication(c, v)
-        return newQGuiApplication()
 
     proc createView*(): QQuickView =
         discard
+
+    proc sfapp_application_create() {.cdecl, importc.}
+
+    proc application*(): QGuiApplication =
+        new result
+        sfapp_application_create()
 
 # Get fully-qualified path to a file in the data directory
 proc pathTo*(filename: string): string =

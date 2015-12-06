@@ -24,8 +24,8 @@
 
 import nimqml, sailfishapp
 
-proc start() =
-    var app = newQGuiApplication() #application()
+proc main() =
+    var app = newQGuiApplication()
     defer: app.delete
     var view = newQQuickView()
     defer: view.delete
@@ -34,5 +34,6 @@ proc start() =
     view.show()
     app.exec()
 
-start()
+when isMainModule:
+    main()
 

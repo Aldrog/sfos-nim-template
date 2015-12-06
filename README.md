@@ -4,7 +4,7 @@ This is a template for SailfishOS app in Nim language.
 This template makes use of [nimqml](https://github.com/filcuc/nimqml) module which is built on top of [DOtherSide](https://github.com/filcuc/DOtherSide) library.  
 This repository includes stripped version of DOtherSide sources (without dependency on QtWidgets so an app you build will be able to pass harbour validator). Actually, you also need to delete a part of nimqml (maybe I will include it to this repository because of that)
 ## How to build
-### Preparation
+### Prerequirements
 * Log into Mer build engine. It's well described on https://sailfishos.org/develop/sdk-overview/develop-faq/
 * Install Nim compiler for both targets:
 ```
@@ -45,7 +45,7 @@ echo 'PATH=$PATH:'$HOME'/.nimble/bin' >> ~/.bashrc
 ```
 nimble install nimqml
 ```
-### Build
+### Building project
 * In build engine cd into project directory and launch build.sh with desired architecture and build mode like this:
 ```
 sh build.sh i486 debug
@@ -53,6 +53,14 @@ sh build.sh i486 debug
 
 This will produce an rpm package in ../build-projname-arch-mode/RPMS
 
+## Rename
+To rename the project you'll need to change the following:
+- 'name' variable in build.sh
+- Name of rpm/.spec file
+- Name entry in .spec file
+- Name and contents of .desktop file
+- Names of .png icons (icons/resolution/*.png)
+
 ## TODO
-* Add how-to-rename instructions
+* Consider including nimqml module into repository
 * Integrate with mapplauncherd for view caching (I'm neither sure if it's possible nor if it's useful so this entry is in question)

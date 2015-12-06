@@ -18,7 +18,7 @@ cp $dosBuildDir/lib/libDOtherSide.so $buildDir/lib/libDOtherSide.so
 cd $buildDir
 echo '
 '$name':	'$projDir'/src/*.nim
-	nim c -o:"'$buildDir'/'$name'" -l:"-L./lib" -d:'$2' '$projDir'/src/main.nim
+	nim c -o:"'$buildDir'/'$name'" -l:"-L./lib" -l:"-Wl,-rpath=/usr/share/'$name'/lib/" -d:'$2' '$projDir'/src/main.nim
 
 install:	'$name' '$projDir'/qml/*.qml '$projDir'/'$name'.desktop '$projDir'/icons/*
 	mkdir -p $(DESTDIR)/usr/bin
